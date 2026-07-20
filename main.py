@@ -336,7 +336,7 @@ def generate_ai_assembly_steps(request: BuildRequest):
         
         # --- Attempt 1: Primary Model (3.5 Flash) ---
         try:
-            response = client.models.generate_content(model='gemini-3.5-flash', contents=prompt)
+            response = client.models.generate_content(model='gemini-2.5-flash', contents=prompt)
             response_text = response.text.strip()
         except Exception as primary_e:
             error_msg = str(primary_e)
@@ -345,7 +345,7 @@ def generate_ai_assembly_steps(request: BuildRequest):
                 
                 # --- Attempt 2: Backup Model (3 Flash) ---
                 try:
-                    backup_response = client.models.generate_content(model='gemini-3-flash', contents=prompt)
+                    backup_response = client.models.generate_content(model='gemini-3.5-flash', contents=prompt)
                     response_text = backup_response.text.strip()
                 except Exception as backup_e:
                     print(f"Backup model failed: {backup_e}")
