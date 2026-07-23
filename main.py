@@ -395,7 +395,7 @@ def generate_ai_assembly_steps(request: BuildRequest):
             }
         }
 
-@app.get("/api/health")
+@app.api_route("/api/health", methods=["GET", "HEAD"])
 def health_check():
     """Keeps the Render server awake via UptimeRobot."""
     return JSONResponse(
