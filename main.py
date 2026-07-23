@@ -3,7 +3,7 @@ import os
 import json
 import re
 import time
-from fastapi import FastAPI
+from fastapi import FastAPI, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
@@ -393,6 +393,17 @@ def generate_ai_assembly_steps(request: BuildRequest):
                 "softwareSteps": [{"title": "API Error", "desc": "Servers are currently at maximum capacity or experiencing network issues. Please try again in a moment."}]
             }
         }
+
+@app.get("/api/health")
+def health_check():
+    """Keeps the Render server awake via UptimeRobot."""
+    return JSONResponse(
+        content={
+            "status": "awake",
+            "message": "Drone Builder backend is active.",
+        },
+        status_code=200,
+    )
 
 @app.post("/api/chat")
 def troubleshoot_chat(request: ChatRequest):
