@@ -337,7 +337,7 @@ def generate_ai_assembly_steps(request: BuildRequest):
         print(f"Asking Gemini to engineer steps for {build_hash}...")
         
         # --- The Model Fallback Hierarchy ---
-        models_to_try = ['gemini-3.5-flash', 'gemini-3-flash', 'gemini-2.5-flash']
+        models_to_try = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.8-flash']
         response_text = None
         
         for idx, model_name in enumerate(models_to_try):
